@@ -1,6 +1,5 @@
 # CHR-XX
 **MikroTik Cloud Hosted Router (CHR)** on **Proxmox VE**
-# 🖥️ CHR Installation Script for Proxmox
 
 A simple shell script to automate the installation of **MikroTik Cloud Hosted Router (CHR)** on **Proxmox VE**.  
 This script helps you deploy CHR quickly and efficiently from the command line without manual configuration.
