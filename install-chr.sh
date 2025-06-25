@@ -48,7 +48,6 @@ else
     # wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version.img.zip
     wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version-legacy-bios.img.zip
     unzip chr-$version-legacy-bios.img.zip
-    qemu-img resize -f raw chr-$ver-legacy-bios.img 256M
     echo "---------------------------------------------------------------------------"
 fi
 
@@ -68,6 +67,7 @@ qemu-img convert \
     -O qcow2 \
     /root/temp/chr-$version-legacy-bios.img \
     /root/temp/chr-$version.qcow2
+    qemu-img resize chr--$version.qcow2 256M
 
 # Create minimal VM
 echo "-- Creating CHR VM with ID $vmID"
