@@ -48,6 +48,7 @@ else
     # wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version.img.zip
     wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version-legacy-bios.img.zip
     unzip chr-$version-legacy-bios.img.zip
+    qemu-img resize -f raw chr-$ver-legacy-bios.img 256M
     echo "---------------------------------------------------------------------------"
 fi
 
