@@ -13,7 +13,7 @@ if [ $(dpkg -l | awk "/$1/ {print }"|wc -l) -ge 1 ]; then
 else
         echo "Melakukan instalasi package unzip di Proxmox!"
         sudo apt update
-        sudo apt install -y unzip
+        sudo apt -y install unzip
 fi
 
 if [ $(dpkg -l | awk "/$1/ {print }"|wc -l) -ge 1 ]; then
@@ -21,7 +21,7 @@ if [ $(dpkg -l | awk "/$1/ {print }"|wc -l) -ge 1 ]; then
 else
         echo "Melakukan instalasi package jq di Proxmox!"
         sudo apt update
-        sudo apt install -y jq
+        sudo apt -y install jq
 fi
 
 echo "## Checking if temp dir is available..."
@@ -38,17 +38,16 @@ echo "## Preparing for image download and VM creation!"
 read -p "Please input CHR version to deploy (e.g. 6.38.2, 6.40.1, 7.18.2): " version
 
 # Check if image is already downloaded
-if [ -f /root/temp/chr-$version-legacy-bios.img ]; then
+if [ -f /root/temp/chr-$version.img ]; then
     echo "-- CHR image is available."
 else
     echo "-- Downloading CHR $version image file."
     cd /root/temp
     echo "---------------------------------------------------------------------------"
     # wget https://download.mikrotik.com/routeros/$version/chr-$version.img.zip
-    # wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version.img.zip
     # unzip chr-$version.img.zip
     wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version-legacy-bios.img.zip
-    unzip chr-$version-legacy-bios.img.zip
+    unzip chr-$version-legacy-bios.img.zip  
     echo "---------------------------------------------------------------------------"
 fi
 
@@ -68,7 +67,7 @@ qemu-img convert \
     -O qcow2 \
     /root/temp/chr-$version.img \
     /root/temp/chr-$version.qcow2
-    qemu-img resize chr-$version.qcow2 1024M
+    qemu-img resize chr-$version.qcow2 256M
 
 # Create minimal VM
 echo "-- Creating CHR VM with ID $vmID"
@@ -80,7 +79,7 @@ qm create $vmID \
   --memory 512 \
   --onboot no \
   --sockets 1 \
-  --cores 1
+  --cores 2
 
 # Import disk to local-lvm
 echo "-- Importing disk to local-lvm..."
