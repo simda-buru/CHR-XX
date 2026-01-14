@@ -61,13 +61,13 @@ read -p "Please Enter a free VM ID to use: " vmID
 echo ""
 
 # Convert image to QCOW2
-echo "-- Converting image to qcow2 format..."
-qemu-img convert \
-    -f raw \
-    -O qcow2 \
-    /root/temp/chr-$version-legacy-bios.img \
-    /root/temp/chr-$version.qcow2
-    qemu-img resize chr-$version.qcow2 256M
+# echo "-- Converting image to qcow2 format..."
+# qemu-img convert \
+#    -f raw \
+#    -O qcow2 \
+#    /root/temp/chr-$version-legacy-bios.img \
+#    /root/temp/chr-$version.qcow2
+#    qemu-img resize chr-$version.qcow2 256M
 
 # Create minimal VM
 echo "-- Creating CHR VM with ID $vmID"
