@@ -45,9 +45,10 @@ else
     cd /root/temp
     echo "---------------------------------------------------------------------------"
     # wget https://download.mikrotik.com/routeros/$version/chr-$version.img.zip
-    # wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version.img.zip
-    wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version-legacy-bios.img.zip
-    unzip chr-$version-legacy-bios.img.zip
+    wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version.img.zip
+    # wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version-legacy-bios.img.zip
+    unzip chr-$version.img.zip
+    # unzip chr-$version-legacy-bios.img.zip
     echo "---------------------------------------------------------------------------"
 fi
 
