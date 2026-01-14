@@ -83,7 +83,7 @@ qm create $vmID \
 
 # Import disk to local-lvm
 echo "-- Importing disk to local-lvm..."
-qm importdisk $vmID /root/temp/chr-$version.qcow2 local-lvm --format qcow2
+qm importdisk $vmID /root/temp/chr-$version-legacy-bios.qcow2 local-lvm --format qcow2
 
 # Attach imported disk as virtio0
 echo "-- Attaching disk to VM..."
