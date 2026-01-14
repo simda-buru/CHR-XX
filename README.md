@@ -11,6 +11,7 @@ This script helps you deploy CHR quickly and efficiently from the command line w
 | File             | Description                                |
 |------------------|--------------------------------------------|
 | `install-chr.sh` | Main shell script to install CHR on Proxmox |
+| `install-chr-7.sh` | Main shell script to install CHR on Proxmox |
 
 ---
 
@@ -28,6 +29,7 @@ This method is ideal if you want to execute the script instantly without cloning
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/simda-buru/CHR-XX/main/install-chr.sh)
+bash <(curl -s https://raw.githubusercontent.com/simda-buru/CHR-XX/main/install-chr-7.sh)
 ```
 ### 🔹 Option 2: Clone the Repository First (Recommended for Review or Customization)
 
