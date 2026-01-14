@@ -38,16 +38,16 @@ echo "## Preparing for image download and VM creation!"
 read -p "Please input CHR version to deploy (e.g. 6.38.2, 6.40.1, 7.18.2): " version
 
 # Check if image is already downloaded
-if [ -f /root/temp/chr-$version.img ]; then
+if [ -f /root/temp/chr-$version-legacy-bios.img ]; then
     echo "-- CHR image is available."
 else
     echo "-- Downloading CHR $version image file."
     cd /root/temp
     echo "---------------------------------------------------------------------------"
     # wget https://download.mikrotik.com/routeros/$version/chr-$version.img.zip
-    # unzip chr-$version.img.zip
+    # wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version.img.zip
     wget https://github.com/elseif/MikroTikPatch/releases/download/$version/chr-$version-legacy-bios.img.zip
-    unzip chr-$version-legacy-bios.img.zip  
+    unzip chr-$version-legacy-bios.img.zip
     echo "---------------------------------------------------------------------------"
 fi
 
@@ -66,8 +66,8 @@ qemu-img convert \
     -f raw \
     -O qcow2 \
     /root/temp/chr-$version-legacy-bios.img \
-    /root/temp/chr-$version-legacy-bios.qcow2
-    qemu-img resize chr-$version-legacy-bios.qcow2 1024M
+    /root/temp/chr-$version.qcow2
+    qemu-img resize chr-$version.qcow2 256M
 
 # Create minimal VM
 echo "-- Creating CHR VM with ID $vmID"
@@ -79,11 +79,11 @@ qm create $vmID \
   --memory 512 \
   --onboot no \
   --sockets 1 \
-  --cores 2
+  --cores 1
 
 # Import disk to local-lvm
 echo "-- Importing disk to local-lvm..."
-qm importdisk $vmID /root/temp/chr-$version-legacy-bios.qcow2 local-lvm --format qcow2
+qm importdisk $vmID /root/temp/chr-$version.qcow2 local-lvm --format qcow2
 
 # Attach imported disk as virtio0
 echo "-- Attaching disk to VM..."
